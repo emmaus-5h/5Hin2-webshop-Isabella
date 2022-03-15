@@ -28,6 +28,10 @@ app.use(express.static('../web'))
 app.get('/api/echo', echoRequest)
 app.get('/api/categories', getCategories)
 app.get('/api/products', getProducts)
+//
+app.get('/api/productsBreakfast', getProductsBreakfast)
+app.get('/api/productsLunch', getProductsLunch)
+//
 app.get('/api/products/:id', getProductById)
 //app.get('/api/products/:id/related', db.getRelatedProductsById)
 // our API is not protected...so let's not expose these
@@ -67,7 +71,29 @@ function getCategories(request, response) {
 function getProducts(request, response) {
   console.log('API ontvangt /api/products/', request.query)
   let data = []
-  const sqlOpdracht = db.prepare('SELECT products.id AS id, products.name AS name, products.description AS description, products.code AS code, products.price AS price FROM products ORDER BY id ASC')
+  const sqlOpdracht = db.prepare('SELECT products.id AS id, products.name AS name, products.description AS description, products.code AS code, products.color AS color , products.price AS price FROM products ORDER BY name ASC')
+  data = sqlOpdracht.all()
+  // console.log(JSON.stringify(data, null, 2))
+  response.status(200).send(data)
+  console.log('API verstuurt /api/products/')
+}
+
+// Breakfast API
+function getProductsBreakfast(request, response) {
+  console.log('API ontvangt /api/products/', request.query)
+  let data = []
+  const sqlOpdracht = db.prepare('SELECT products.id AS id, products.name AS name, products.description AS description, products.code AS code, products.color AS color , products.price AS price FROM products WHERE id in (3,4,6) ORDER BY name ASC')
+  data = sqlOpdracht.all()
+  // console.log(JSON.stringify(data, null, 2))
+  response.status(200).send(data)
+  console.log('API verstuurt /api/products/')
+}
+
+// Lunch
+function getProductsLunch(request, response) {
+  console.log('API ontvangt /api/products/', request.query)
+  let data = []
+  const sqlOpdracht = db.prepare('SELECT products.id AS id, products.name AS name, products.description AS description, products.code AS code, products.color AS color , products.price AS price FROM products WHERE id in (1,5,8,9) ORDER BY name ASC')
   data = sqlOpdracht.all()
   // console.log(JSON.stringify(data, null, 2))
   response.status(200).send(data)
@@ -78,7 +104,7 @@ function getProductById(request, response) {
   console.log('API ontvangt /api/products/:id', request.query)
   let data = []
   const product_id = parseInt(request.params.id)
-  const sqlOpdracht = db.prepare('SELECT products.id AS id, products.name AS name, products.description AS description, products.code AS code, products.price AS price FROM products WHERE id = ?')
+  const sqlOpdracht = db.prepare('SELECT products.id AS id, products.name AS name, products.description AS description, products.code AS code, products.color AS color ,products.price AS price FROM products WHERE id = ?')
   data = sqlOpdracht.all(product_id)
   response.status(200).json(data[0])
 }

@@ -55,9 +55,9 @@
   <!-- lijst met producten, wordt gevuld door javascript -->
 	<main id="index">
 		<div class="container">
-			<h5>Isabella's Deli</h5>
-			<p>Welkom is inze webwinkel voor Isabella's Deli !</p>
-			<p>Wij hebben verschillende gerechten voor het ontbijt en de lunch, probeer ook eens onze verse sappen.<p>
+			<h5>Ontbijt</h5>
+			<p>Special voor de vroege vogels hebben wij een special ontbijt menu..</p>
+<br></br>	
 			<p>klik op de "winkelwagentje" om het artikel in je winkelwagen te stoppen</p>
 		</div>	
     <!-- template for product info-->
@@ -104,7 +104,7 @@
         // laad producten
         // de functie showProducts wordt aangeroepen als er antwoord van de API is
         var request = new XMLHttpRequest()
-        request.open('GET', '/api/products', true) 
+        request.open('GET', '/api/productsBreakfast', true) 
         request.onload = showProducts 
         request.send() 
 

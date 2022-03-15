@@ -1,5 +1,16 @@
 /* all pages */
 
+body {
+  background-image: url("/images/i-like-food.svg");
+  background-color: rgb(243,243,243);
+}
+
+ .logo-image{
+    width: 100px;
+    overflow: hidden;
+    
+}
+
 footer {
   margin: 20px;
   font-size: 12px;
@@ -24,7 +35,7 @@ footer {
 
 .card {
   width:200px; 
-  height: 700px; 
+  height: 750px; 
   margin-bottom: 20px
 }
 
